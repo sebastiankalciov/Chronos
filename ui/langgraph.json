@@ -3,6 +3,8 @@
   "dependencies": [
     "."
   ],
-  "graphs": {},
+  "graphs": {
+    "agent-input": "./apps/agents/src/agent-input/agent-input.ts:agent-input"
+  },
   "env": ".env"
 }
