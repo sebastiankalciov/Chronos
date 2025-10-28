@@ -34,6 +34,8 @@
     "@langchain/core": "^1.0.1"
   },
   "dependencies": {
+    "@langchain/google-gauth": "^1.0.0",
+    "@langchain/google-genai": "^1.0.0",
     "langchain": "^1.0.1"
   }
 }

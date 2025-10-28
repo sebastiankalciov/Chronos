@@ -4,7 +4,7 @@
     "."
   ],
   "graphs": {
-    "agent-input": "./apps/agents/src/agent-input/agent-input.ts:agent-input"
+    "agent-input": "./apps/agents/src/agent-input/graph.ts:graph"
   },
   "env": ".env"
 }
