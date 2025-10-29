@@ -13,6 +13,9 @@ $ macOS / Linux: source env/bin/activate
 $ pip install -U langchain
 $ pip install --upgrade "langgraph-cli[inmem]"
 
+# TO-DO: Instructions for API keys
+> ...
+
 # Start the server
 $ cd ui
 $ npm install

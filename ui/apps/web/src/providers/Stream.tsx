@@ -227,22 +227,22 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
               />
             </div>
 
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="apiKey">LangSmith API Key</Label>
-              <p className="text-muted-foreground text-sm">
-                This is <strong>NOT</strong> required if using a local LangGraph
-                server. This value is stored in your browser's local storage and
-                is only used to authenticate requests sent to your LangGraph
-                server.
-              </p>
-              <PasswordInput
-                id="apiKey"
-                name="apiKey"
-                defaultValue={apiKey ?? ""}
-                className="bg-background"
-                placeholder="lsv2_pt_..."
-              />
-            </div>
+            {/*<div className="flex flex-col gap-2">*/}
+            {/*  <Label htmlFor="apiKey">LangSmith API Key</Label>*/}
+            {/*  <p className="text-muted-foreground text-sm">*/}
+            {/*    This is <strong>NOT</strong> required if using a local LangGraph*/}
+            {/*    server. This value is stored in your browser's local storage and*/}
+            {/*    is only used to authenticate requests sent to your LangGraph*/}
+            {/*    server.*/}
+            {/*  </p>*/}
+            {/*  <PasswordInput*/}
+            {/*    id="apiKey"*/}
+            {/*    name="apiKey"*/}
+            {/*    defaultValue={apiKey ?? ""}*/}
+            {/*    className="bg-background"*/}
+            {/*    placeholder="lsv2_pt_..."*/}
+            {/*  />*/}
+            {/*</div>*/}
 
             <div className="flex justify-end mt-2">
               <Button type="submit" size="lg">

@@ -12,7 +12,6 @@ import {
   DO_NOT_RENDER_ID_PREFIX,
   ensureToolCallsHaveResponses,
 } from "@/lib/ensure-tool-responses";
-import { LangGraphLogoSVG } from "../icons/langgraph";
 import { TooltipIconButton } from "./tooltip-icon-button";
 import {
   ArrowDown,
@@ -28,7 +27,7 @@ import { toast } from "sonner";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
-import { GitHubSVG } from "../icons/github";
+
 import {
   Tooltip,
   TooltipContent,
@@ -84,7 +83,6 @@ function OpenGitHubRepo() {
             target="_blank"
             className="flex items-center justify-center"
           >
-            <GitHubSVG width="24" height="24" />
           </a>
         </TooltipTrigger>
         <TooltipContent side="left">
@@ -299,7 +297,7 @@ export function Thread() {
                   damping: 30,
                 }}
               >
-                <LangGraphLogoSVG width={32} height={32} />
+
                 <span className="text-xl font-semibold tracking-tight">
                   Chronos
                 </span>
@@ -372,7 +370,7 @@ export function Thread() {
               <div className="sticky flex flex-col items-center gap-8 bottom-0 bg-white">
                 {!chatStarted && (
                   <div className="flex gap-3 items-center">
-                    <LangGraphLogoSVG className="flex-shrink-0 h-8" />
+
                     <h1 className="text-2xl font-semibold tracking-tight">
                       Chronos
                     </h1>

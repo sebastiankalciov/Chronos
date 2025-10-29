@@ -1,31 +1,21 @@
-  import { MessagesAnnotation, StateGraph } from "@langchain/langgraph";
-import { ToolNode } from "@langchain/langgraph/prebuilt";
-import { ChatGoogle } from "@langchain/google-gauth";
-import { GoogleAIToolType } from "@langchain/google-common";
+import { MessagesAnnotation, StateGraph } from "@langchain/langgraph";
+import agentInput from "./agent-input.js";
+import { agentCalendar } from "../agent-calendar/agent-calendar.js";
 
-const tools: GoogleAIToolType[] = [];
-
-async function callModel(state: typeof MessagesAnnotation.State) {
-  const model =   new ChatGoogle({
-    model: "gemini-2.5-pro",
-  }).bindTools(tools);
-  const response = await model.invoke([
-    { role: "system", content: `You are a helpful assistant.` },
-    ...state.messages,
-  ]);
-  return { messages: response };
-}
-
-function routeModelOutput(state: typeof MessagesAnnotation.State) {
+// decide what to do based on the last message
+function router(state: typeof MessagesAnnotation.State) {
   const lastMessage = state.messages[state.messages.length - 1];
-  return "__end__";
+
+  return lastMessage.content.includes("calendar") ? "agentCalendar" : "__end__";
 }
 
+// build the graph
 const workflow = new StateGraph(MessagesAnnotation)
-  .addNode("callModel", callModel)
-  .addNode("tools", new ToolNode(tools))
-  .addEdge("__start__", "callModel")
-  .addConditionalEdges("callModel", routeModelOutput, ["tools", "__end__"])
-  .addEdge("tools", "callModel");
+  .addNode("agentInput", agentInput)
+  .addNode("agentCalendar", agentCalendar)
+  .addEdge("__start__", "agentInput")
+  .addEdge("agentInput", "agentCalendar")
+  .addConditionalEdges("agentInput", router, ["agentCalendar", "__end__"])
+  .addEdge("agentCalendar", "agentInput");
 
 export const graph = workflow.compile();

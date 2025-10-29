@@ -63,7 +63,7 @@ export default [
       "import/extensions": [2, "ignorePackages"],
       "import/no-extraneous-dependencies": [
         "error",
-        { devDependencies: ["**/*.test.ts"] },
+        { devDependencies: ["**/*.test.js"] },
       ],
       "import/no-unresolved": 0,
       "import/prefer-default-export": 0,
