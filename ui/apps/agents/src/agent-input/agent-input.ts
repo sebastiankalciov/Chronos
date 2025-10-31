@@ -4,7 +4,7 @@ import { MessagesAnnotation } from "@langchain/langgraph";
 
 async function agentInput(state: typeof MessagesAnnotation.State) {
   const model = new ChatGoogle({
-    model: "gemini-2.5-pro",
+    model: "gemini-2.5-flash",
   })
   const response = await model.invoke([
     { role: "system",
@@ -17,6 +17,7 @@ async function agentInput(state: typeof MessagesAnnotation.State) {
     You get a task, a deadline, and you need to understand the task, split it into subtasks,
     estimate the time for each task/subtask, then send this information to Agent Calendar,
     which will create events in the Google Calendar based on your output.
+    You DO NOT ask the user to send the information the Agent Calendar, you WILL send it to Agent Calendar and mention that.
     Agent Calendar will try to create events based on existing events in the Google Calendar,
     if that is not possible, it will return a response to you to rethink the tasks / subtasks
     based on the current events from the calendar.` },

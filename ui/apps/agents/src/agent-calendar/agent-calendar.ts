@@ -42,12 +42,20 @@ class PatchedGoogleCalendarViewTool extends GoogleCalendarViewTool {
 
 class PatchedGoogleCalendarCreateTool extends GoogleCalendarCreateTool {
   name = "google_calendar_create";
-  description = `Create the calendar event. Input must include:
-  - summary: string
-  - description?: string
-  - startDateTime: ISO string (e.g. "2025-10-30T09:00:00")
-  - endDateTime: ISO string (e.g. "2025-10-30T10:00:00")
-  - timeZone?: string (default: "Europe/Bucharest")`;
+  description = `Create a new calendar event. 
+  Use this to schedule tasks from Agent Input.
+  Consider the current date and time (this is the current date and time: ${new Date()}) and already existing events in the calendar.
+  Make sure the task DO NOT overlap with existing events.
+  The event should be in JSON format, like in the following example:
+  {
+    "summary": "[Main Task name] Subtask name",
+    "description": "Task description",
+    "startDateTime": "2025-10-20T12:00:00+03:00",
+    "endDateTime": "2025-10-20T15:30:00+03:00",
+    "timeZone": "Europe/Bucharest"
+  }
+  The dates should be in ISO format.
+  After you add the event, return a positive message back to the user.`;
 
   async _call(input: any) {
     const {
@@ -56,8 +64,9 @@ class PatchedGoogleCalendarCreateTool extends GoogleCalendarCreateTool {
       startDateTime: startStr,
       endDateTime: endStr,
       timeZone = "Europe/Bucharest",
-    } = input;
+    } = JSON.parse(input);
 
+    console.log("🛠️ TOOL INPUT DEBUG:", JSON.stringify(input, null, 2));
     if (!summary || !startStr || !endStr) {
       return "ERROR: Missing required fields: summary, startDateTime, endDateTime";
     }
@@ -111,7 +120,7 @@ class PatchedGoogleCalendarCreateTool extends GoogleCalendarCreateTool {
 
 export async function agentCalendar(state: typeof MessagesAnnotation.State) {
   const model = new ChatGoogle({
-    model: "gemini-2.5-pro",
+    model: "gemini-2.5-flash",
   });
 
   const googleCalendarParams = {
@@ -155,20 +164,26 @@ export async function agentCalendar(state: typeof MessagesAnnotation.State) {
   You can also delete or move events based on the information given by Agent Input.
   You can also respond to questions about events that are already in the calendar given by
   Agent Input.
-  When you finish the task, you will return a response to Agent Input.
+  When you finish the task, you will return a response to the user to say that you have finished the task.
   
   WORKFLOW:
-  1. First. Always call view_calendar to see the current schedule
-  2. Find free slots
+  1. First. Always call view_calendar to see the current schedule and the CURRENT DATE and TIME (this is the current DATE and TIME: ${new Date()}).
+  2. Find free slots, make sure events DO NOT OVERLAP.
   3. ONLY use create_event with EXACT format:
-   summary: "Task name"
-   startDateTime: "2025-10-30T09:00:00" 
-   endDateTime: "2025-10-30T10:00:00"
-   This is an example of a CORRECT start/end time: "start": { "dateTime": "2025-10-20T12:00:00+03:00", "timeZone": "Europe/Bucharest" }, "end": { "dateTime": "2025-10-20T15:30:00+03:00", "timeZone": "Europe/Bucharest" }
+  {
+    "summary": "[Main Task name] Subtask name",
+    "description": "Task description",
+    "startDateTime": "2025-10-20T12:00:00+03:00",
+    "endDateTime": "2025-10-20T15:30:00+03:00",
+    "timeZone": "Europe/Bucharest"
+  }
   `;
 
-  const response = await calendarAgent.invoke({
-    messages: [{ role: "system", content: prompt }, ...state.messages],
-  });
+  const response = await calendarAgent.invoke(
+    {
+      messages: [{ role: "system", content: prompt }, ...state.messages],
+    },
+    { recursionLimit: 100 }
+  );
   return { messages: [...state.messages, response] };
 }
