@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://youtu.be/ZVMqVwwCjDo">
-    <img src="https://img.youtube.com/vi/ZVMqVwwCjDo/maxresdefault.jpg" width="80%">
+    <img src="./assets/thumbnail.png" width="80%">
   </a>
   <br>
   <i>Watch Chronos</i>
