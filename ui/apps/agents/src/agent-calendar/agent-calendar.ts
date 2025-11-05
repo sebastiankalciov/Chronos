@@ -8,6 +8,7 @@ import { ChatGoogle } from "@langchain/google-gauth";
 import { MessagesAnnotation } from "@langchain/langgraph";
 import { google } from "googleapis";
 
+const MODEL_NAME = "gemini-2.5-pro";
 async function getGoogleAuth() {
   return new google.auth.GoogleAuth({
     credentials: {
@@ -55,7 +56,7 @@ class PatchedGoogleCalendarCreateTool extends GoogleCalendarCreateTool {
     "timeZone": "Europe/Bucharest"
   }
   The dates should be in ISO format.
-  After you add the event, return a positive message back to the user.`;
+  After you add the event, return a positive message back to the user, not to the Agent Input.`;
 
   async _call(input: any) {
     const {
@@ -120,7 +121,7 @@ class PatchedGoogleCalendarCreateTool extends GoogleCalendarCreateTool {
 
 export async function agentCalendar(state: typeof MessagesAnnotation.State) {
   const model = new ChatGoogle({
-    model: "gemini-2.5-flash",
+    model: MODEL_NAME,
   });
 
   const googleCalendarParams = {

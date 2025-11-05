@@ -3,19 +3,10 @@
 
 ## Setup
 ```bash
-# Create an environment
-$ python -m venv env
-$ Windows: env\Scripts\activate
-$ macOS / Linux: source env/bin/activate
-
-# Install langchain dependencies
-$ pip install -U langchain
-$ pip install --upgrade "langgraph-cli[inmem]"
-
 # Start the server
 $ cd ui
 $ npm install
-$ npm run dev --tunnel
+$ npm run dev
 ```
 
 ## Template .env file
@@ -30,5 +21,5 @@ GOOGLE_CALENDAR_PRIVATE_KEY="" #-----BEGIN PRIVATE KEY-----\n[...]=\n-----END PR
 GOOGLE_CALENDAR_CALENDAR_ID="" # [id]@group.calendar.google.com
 ```
 
-> SOON: Instruction on how to get all API Keys
+> SOON: Instructions on how to gather all API Keys
 

@@ -4,7 +4,7 @@ import { MessagesAnnotation } from "@langchain/langgraph";
 
 async function agentInput(state: typeof MessagesAnnotation.State) {
   const model = new ChatGoogle({
-    model: "gemini-2.5-flash",
+    model: "gemini-2.5-pro",
   })
   const response = await model.invoke([
     { role: "system",
@@ -14,6 +14,7 @@ async function agentInput(state: typeof MessagesAnnotation.State) {
     completion for each task / subtask).
     You are NOT supposed to answer any unrelated questions besides time management,
     business / startups, and task splitting / handling or unrelated to the tasks themself.
+    Even if the input is extremly important in other fields of life, you are NOT supposed to answer it.
     You get a task, a deadline, and you need to understand the task, split it into subtasks,
     estimate the time for each task/subtask, then send this information to Agent Calendar,
     which will create events in the Google Calendar based on your output.
