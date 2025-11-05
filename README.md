@@ -1,4 +1,7 @@
 # Chronos
+
+[![Presentation](https://raw.githubusercontent.com/sebastiankalciov/Chronos/main/assets/thumbnail.png)](https://raw.githubusercontent.com/sebastiankalciov/Chronos/main/assets/Chronos-Presentation.mp4)
+
 **Chronos** is an intelligent scheduling companion - two AI agents working together to plan, coordinate and manage your tasks through **Google Calendar**
 
 ## Setup
