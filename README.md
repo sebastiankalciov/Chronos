@@ -1,6 +1,6 @@
 # Chronos
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZVMqVwwCjDo?si=oN3JY9nf41yEMnz8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<video src = "./assets/Chronos-Presentation.mp4" poster = "./assets/thumbnail.png" width="560" height="315" controls></video>
 
 **Chronos** is an intelligent scheduling companion - two AI agents working together to plan, coordinate and manage your tasks through **Google Calendar**
 
